@@ -1,12 +1,16 @@
-import { Button } from 'antd';
-import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import '../styles/App.css';
+
+import Home from '../pages/Home';
 
 function App() {
   return (
-    <>
-      <Button>News</Button>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
