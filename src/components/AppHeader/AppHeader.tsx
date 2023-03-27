@@ -9,20 +9,20 @@ import logo from '../../assets/images/logo.png';
 const { Header } = Layout;
 
 const ResponsiveHeader = () => {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
-    setVisible(true);
+    setOpen(true);
   };
 
   const onClose = () => {
-    setVisible(false);
+    setOpen(false);
   };
 
   return (
     <Header className="header">
       <Link to={'/'} className="logo">
-        <img src={logo} width={40} height={40} />
+        <img src={logo} width={40} height={40} alt="app logo" />
         <h1>Newslynet</h1>
       </Link>
       <Menu mode="horizontal" defaultSelectedKeys={['1']} className="menu-nav">
@@ -43,7 +43,7 @@ const ResponsiveHeader = () => {
         placement="right"
         closable={true}
         onClose={onClose}
-        visible={visible}
+        open={open}
         className="custom-drawer"
       >
         <Menu mode="inline" defaultSelectedKeys={['1']}>
@@ -60,5 +60,3 @@ const ResponsiveHeader = () => {
 };
 
 export default ResponsiveHeader;
-
-// -------------------------------------recomen 2
