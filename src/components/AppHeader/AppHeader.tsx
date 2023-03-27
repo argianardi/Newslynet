@@ -1,102 +1,10 @@
-// import { Layout, Menu, Space } from 'antd';
-// import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/logo.png';
-// import { DownOutlined } from '@ant-design/icons';
-
-import './AppHeader.css';
-
-// import type { MenuProps } from 'antd';
-// import { Button, Dropdown } from 'antd';
-
-// const { Header } = Layout;
-
-// // const items: MenuProps['items'] = [
-// //   {
-// //     key: '1',
-// //     label: <li>business</li>,
-// //   },
-// //   {
-// //     key: '2',
-// //     label: <li>entertaiment</li>,
-// //   },
-// //   {
-// //     key: '3',
-// //     label: <li>general</li>,
-// //   },
-// //   {
-// //     key: '4',
-// //     label: <li>general</li>,
-// //   },
-// //   {
-// //     key: '5',
-// //     label: <li>general</li>,
-// //   },
-// //   {
-// //     key: '6',
-// //     label: <li>general</li>,
-// //   },
-// //   {
-// //     key: '7',
-// //     label: <li>general</li>,
-// //   },
-// // ];
-
-// const items = (
-//   <Menu>
-//     <Menu.Item key="1">Option 1</Menu.Item>
-//     <Menu.Item key="2">Option 2</Menu.Item>
-//     <Menu.Item key="3">Option 3</Menu.Item>
-//   </Menu>
-// );
-// const AppHeader: FC = () => {
-//   return (
-//     <Header className="header">
-//       <Link to={'/'} className="logo">
-//         <img src={logo} width={40} height={40} />
-//         <h1>Newslynet</h1>
-//       </Link>
-//       <nav>
-//         {/* <ul
-//           style={{
-//             width: 600,
-//             listStyle: 'none',
-//             display: 'flex',
-//             padding: 0,
-//             justifyContent: 'space-between',
-//           }}
-//         >
-//           <li>business</li>
-//           <li>entertaiment</li>
-//           <li>general</li>
-//           <li>health</li>
-//           <li>science</li>
-//           <li>sports</li>
-//           <li>technology</li>
-//         </ul> */}
-//         <Dropdown
-//           overlay={items}
-//           placement="bottomRight"
-//           arrow={{ pointAtCenter: true }}
-//           trigger={['click']}
-//         >
-//           <Button onClick={(e) => e.preventDefault()}>
-//             <Space>Click</Space>
-//             <DownOutlined />
-//           </Button>
-//         </Dropdown>
-//       </nav>
-//     </Header>
-//   );
-// };
-
-// export default AppHeader;
-
-//--------------------------------------- recomen1
-
 import { useState } from 'react';
 import { Button, Drawer, Layout, Menu } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+
+import './AppHeader.css';
+import logo from '../../assets/images/logo.png';
 
 const { Header } = Layout;
 
