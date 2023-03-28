@@ -8,6 +8,7 @@ import AppHeader from '../components/AppHeader/AppHeader';
 import CoverArticleCard from '../components/CoverArticleCard/CoverArticleCard';
 import { Article } from '../types/article';
 import BestWeeklyArticlesCard from '../components/BestWeeklyArticlesCard/BestWeeklyArticlesCard';
+import ArticleSnippetCard from '../components/ArticleSnippetCard/ArticleSnippetCard';
 
 const ArticleDetail: FC = () => {
   const location = useLocation();
@@ -43,7 +44,6 @@ const ArticleDetail: FC = () => {
   }, [bestWeeklyArticles]);
 
   const handleGoToArticleDetail = (article: Article) => {
-    console.log(article);
     navigate(`/article/detail/${article.title}`, {
       state: article,
     });
@@ -57,15 +57,15 @@ const ArticleDetail: FC = () => {
         </Row>
       </Header>
       <Content className="content">
-        <Row>
+        <Row gutter={[16, 16]}>
           <Col xs={24} sm={24} md={15} lg={16} xl={15}>
-            <div className="col-right-spacing">
+            <div>
               <CoverArticleCard coverArticle={article} />
             </div>
           </Col>
           <Col xs={24} sm={24} md={9} lg={8} xl={9}>
-            {topThreeArticles.map((article) => (
-              <div className="col-left-spacing">
+            {topThreeArticles.map((article, index) => (
+              <div key={index}>
                 <BestWeeklyArticlesCard
                   article={article}
                   onGotoArticleDetail={() => handleGoToArticleDetail(article)}
@@ -74,21 +74,36 @@ const ArticleDetail: FC = () => {
             ))}
           </Col>
         </Row>
-        <Row>
-          <Col span={24}>
-            <div className="article-cards-layout br">
-              <p>card article 1</p>
-            </div>
-            <div className="article-cards-layout br">
-              <p>card article 2</p>
-            </div>
-            <div className="article-cards-layout br">
-              <p>card article 3</p>
-            </div>
-            <div className="article-cards-layout br">
-              <p>card article 4</p>
-            </div>
-          </Col>
+        <Row gutter={[20, 16]} style={{ marginTop: 30 }}>
+          <div
+            style={{
+              backgroundColor: 'white',
+              marginBottom: -20,
+              marginLeft: 10,
+              marginRight: 10,
+              paddingBottom: 15,
+              borderTop: '2px solid black',
+              width: '100%',
+            }}
+          >
+            <h3
+              style={{
+                textTransform: 'capitalize',
+                paddingLeft: 5,
+              }}
+              className="title"
+            >
+              Latest News
+            </h3>
+          </div>
+          {otherArticles.map((article, index) => (
+            <Col key={index} xs={24} sm={12} md={8} lg={8} span={24}>
+              <ArticleSnippetCard
+                article={article}
+                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+              />
+            </Col>
+          ))}
         </Row>
       </Content>
       <Footer style={{ textAlign: 'center' }} className="content">
