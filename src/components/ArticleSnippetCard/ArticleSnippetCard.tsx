@@ -36,10 +36,15 @@ const ArticleSnippetCard: FC<Props> = ({ article, onGotoArticleDetail }) => {
           <p style={{ fontSize: 11 }} className="date">
             {article.publishedAt}
           </p>
-          <h2 className="title" style={{ fontSize: 14 }}>
+          <h2
+            className="title"
+            style={{ fontSize: 14, width: '100%', wordWrap: 'break-word' }}
+          >
             {article.title}
           </h2>
-          <p className="desc">{article.description}</p>
+          <p className="desc" style={{ width: '100%', wordWrap: 'break-word' }}>
+            {article.description}
+          </p>
         </>
       ) : (
         <p>No article found.</p>
