@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FC, useState } from 'react';
 import { Button, Drawer, Layout, Menu } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { BiChevronDownCircle } from 'react-icons/bi';
 
 import './AppHeader.css';
 import logo from '../../assets/images/logo.png';
@@ -33,7 +33,7 @@ const AppHeader: FC<Props> = ({ hiddenCategory, onHandleCategory }) => {
     <Header className="header">
       <Link to={'/'} className="logo">
         <img src={logo} width={40} height={40} alt="app logo" />
-        <h1>Newslynet</h1>
+        <h1 className="app-name">Newslynet</h1>
       </Link>
       {hiddenCategory && (
         <>
@@ -62,12 +62,28 @@ const AppHeader: FC<Props> = ({ hiddenCategory, onHandleCategory }) => {
             </Menu.Item>
           </Menu>
           <div className="menu-toggle ">
-            <Button onClick={showDrawer}>
-              <MenuOutlined />
+            <Button
+              onClick={showDrawer}
+              type="text"
+              style={{ padding: 0, marginTop: 25 }}
+              className=""
+            >
+              <BiChevronDownCircle size="30" />
             </Button>
           </div>
         </>
       )}
+
+      <Link to="/archived-articles">
+        <Button
+          type="default"
+          size="middle"
+          className="title"
+          style={{ fontWeight: 'bold' }}
+        >
+          Archive
+        </Button>
+      </Link>
 
       <Drawer
         title="Menu"
