@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import '../styles/App.css';
-
 import Home from '../pages/Home';
 import ArticleDetail from '../pages/ArticleDetail';
+import ArchivedArticles from '../pages/ArchivedArticles';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
           path="/article/detail/:articleTitle"
           element={<ArticleDetail />}
         />
+        <Route path="/archived-articles" element={<ArchivedArticles />} />
       </Routes>
     </BrowserRouter>
   );
