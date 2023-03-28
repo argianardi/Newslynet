@@ -3,21 +3,33 @@ import { Row, Col, Layout } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import {
+  addToArchive,
+  removeFromArchive,
+} from '../utils/redux/features/archiveSlice';
 import AppHeader from '../components/AppHeader/AppHeader';
 import CoverArticleCard from '../components/CoverArticleCard/CoverArticleCard';
 import { Article } from '../types/article';
 import BestWeeklyArticlesCard from '../components/BestWeeklyArticlesCard/BestWeeklyArticlesCard';
 import ArticleSnippetCard from '../components/ArticleSnippetCard/ArticleSnippetCard';
+import { RootState } from '../utils/redux/store/store';
 
 const ArticleDetail: FC = () => {
   const location = useLocation();
   const article = location.state;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [bestWeeklyArticles, setBestWeeklyArticles] = useState<Article[]>([]);
   const [topThreeArticles, setTopThreeArticles] = useState<Article[]>([]);
   const [otherArticles, setOtherArticles] = useState<Article[]>([]);
+
+  const archivedArticles = useSelector(
+    (state: RootState) => state.archive.articles
+  );
 
   useEffect(() => {
     getbestWeeklyArticles();
@@ -49,8 +61,16 @@ const ArticleDetail: FC = () => {
     });
   };
 
+  const handleAddToArchive = (article: Article) => {
+    dispatch(addToArchive(article));
+  };
+
+  const handleRemoveFromArchive = (article: Article) => {
+    dispatch(removeFromArchive(article));
+  };
+
   return (
-    <Layout>
+    <Layout style={{ overflowX: 'hidden' }}>
       <Header style={{ zIndex: 999, marginBottom: 15 }}>
         <Row justify="center">
           <AppHeader hiddenCategory={false} />
@@ -64,14 +84,22 @@ const ArticleDetail: FC = () => {
             </div>
           </Col>
           <Col xs={24} sm={24} md={9} lg={8} xl={9}>
-            {topThreeArticles.map((article, index) => (
-              <div key={index}>
-                <BestWeeklyArticlesCard
-                  article={article}
-                  onGotoArticleDetail={() => handleGoToArticleDetail(article)}
-                />
-              </div>
-            ))}
+            {topThreeArticles.map((article, index) => {
+              const isArchived = archivedArticles.some(
+                (archivedArticle) => archivedArticle.title === article.title
+              );
+              return (
+                <div key={index}>
+                  <BestWeeklyArticlesCard
+                    article={article}
+                    onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+                    onAddToArchive={() => handleAddToArchive(article)}
+                    onRemoveFromArchive={() => handleRemoveFromArchive(article)}
+                    isArchived={isArchived}
+                  />
+                </div>
+              );
+            })}
           </Col>
         </Row>
         <Row gutter={[20, 16]} style={{ marginTop: 30 }}>
@@ -96,14 +124,22 @@ const ArticleDetail: FC = () => {
               Latest News
             </h3>
           </div>
-          {otherArticles.map((article, index) => (
-            <Col key={index} xs={24} sm={12} md={8} lg={6} span={24}>
-              <ArticleSnippetCard
-                article={article}
-                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
-              />
-            </Col>
-          ))}
+          {otherArticles.map((article, index) => {
+            const isArchived = archivedArticles.some(
+              (archivedArticle) => archivedArticle.title === article.title
+            );
+            return (
+              <Col key={index} xs={24} sm={12} md={8} lg={6} span={24}>
+                <ArticleSnippetCard
+                  article={article}
+                  onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+                  onAddToArchive={() => handleAddToArchive(article)}
+                  onRemoveFromArchive={() => handleRemoveFromArchive(article)}
+                  isArchived={isArchived}
+                />
+              </Col>
+            );
+          })}
         </Row>
       </Content>
       <Footer style={{ textAlign: 'center' }} className="content">

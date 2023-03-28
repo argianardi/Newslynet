@@ -32,26 +32,28 @@ const CoverArticleCard: FC<Props> = ({ coverArticle }) => {
       </div>
       {coverArticle ? (
         <>
-          <div
-            style={{
-              position: 'relative',
-              width: '100%',
-              height: '0',
-              paddingBottom: '56.25%',
-            }}
-          >
-            <img
-              src={coverArticle.urlToImage}
-              alt={coverArticle.title}
+          {coverArticle.urlToImage && (
+            <div
               style={{
-                position: 'absolute',
-                top: '0',
-                left: '0',
+                position: 'relative',
                 width: '100%',
-                height: '100%',
+                height: '0',
+                paddingBottom: '56.25%',
               }}
-            />
-          </div>
+            >
+              <img
+                src={coverArticle.urlToImage}
+                alt={coverArticle.title}
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </div>
+          )}
           <p style={{ fontSize: 11 }} className="date">
             {moment(coverArticle.publishedAt).format('MMMM DD, YYYY')}
           </p>
@@ -60,12 +62,7 @@ const CoverArticleCard: FC<Props> = ({ coverArticle }) => {
           </h2>
           <p className="desc">{coverArticle.description}</p>
           <p className="desc">{coverArticle.content}</p>
-          <a
-            className="link"
-            href={coverArticle.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={coverArticle.url} target="_blank" rel="noopener noreferrer">
             Continue Reading
           </a>
         </>

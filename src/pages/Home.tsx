@@ -2,7 +2,14 @@ import { FC, useEffect, useState } from 'react';
 import { Col, Layout, Row } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import { RootState } from '../utils/redux/store/store';
+import {
+  addToArchive,
+  removeFromArchive,
+} from '../utils/redux/features/archiveSlice';
 import { Article } from '../types/article';
 import CoverArticleCard from '../components/CoverArticleCard/CoverArticleCard';
 import CategoryCard from '../components/CategoryCard/CategoryCard';
@@ -13,13 +20,17 @@ const { Header, Content, Footer } = Layout;
 
 const Home: FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [categorizedArticles, setCategorizedArticles] = useState<Article[]>([]);
   const [bestWeeklyArticles, setBestWeeklyArticles] = useState<Article[]>([]);
   const [coverArticle, setCoverArticle] = useState<Article | undefined>(
     undefined
   );
   const [category, setCategory] = useState<string>('business');
+
+  const archivedArticles = useSelector(
+    (state: RootState) => state.archive.articles
+  );
 
   useEffect(() => {
     getArticlesByCategory();
@@ -71,8 +82,16 @@ const Home: FC = () => {
     setCategory(category);
   };
 
+  const handleAddToArchive = (article: Article) => {
+    dispatch(addToArchive(article));
+  };
+
+  const handleRemoveFromArchive = (article: Article) => {
+    dispatch(removeFromArchive(article));
+  };
+
   return (
-    <Layout>
+    <Layout style={{ overflowX: 'hidden' }}>
       <Header style={{ zIndex: 999, marginBottom: 15 }}>
         <Row justify="center">
           <AppHeader hiddenCategory={true} onHandleCategory={handleCategory} />
@@ -106,13 +125,21 @@ const Home: FC = () => {
                 {category} category
               </h3>
             </div>
-            {categorizedArticles.map((article, index) => (
-              <CategoryCard
-                article={article}
-                key={index}
-                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
-              />
-            ))}
+            {categorizedArticles.map((article, index) => {
+              const isArchived = archivedArticles.some(
+                (archivedArticle) => archivedArticle.title === article.title
+              );
+              return (
+                <CategoryCard
+                  article={article}
+                  key={index}
+                  onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+                  onAddToArchive={() => handleAddToArchive(article)}
+                  onRemoveFromArchive={() => handleRemoveFromArchive(article)}
+                  isArchived={isArchived}
+                />
+              );
+            })}
           </Col>
           <Col span={24} lg={8} className="">
             <div
@@ -137,13 +164,22 @@ const Home: FC = () => {
                 Best Of The Week
               </h3>
             </div>
-            {bestWeeklyArticles.map((article: Article, index: number) => (
-              <BestWeeklyArticleCard
-                article={article}
-                key={index}
-                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
-              />
-            ))}
+            {bestWeeklyArticles.map((article: Article, index: number) => {
+              const isArchived = archivedArticles.some(
+                (archivedArticle) => archivedArticle.title === article.title
+              );
+
+              return (
+                <BestWeeklyArticleCard
+                  article={article}
+                  key={index}
+                  onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+                  onAddToArchive={() => handleAddToArchive(article)}
+                  onRemoveFromArchive={() => handleRemoveFromArchive(article)}
+                  isArchived={isArchived}
+                />
+              );
+            })}
           </Col>
         </Row>
       </Content>

@@ -16,8 +16,10 @@
   font-size: small;
 }
 
-.menu-toggle {
-  display: none;
+@media only screen and (max-width: 350px) {
+  h1.app-name {
+    font-size: 14px;
+  }
 }
 
 .menu-nav {
