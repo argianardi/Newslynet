@@ -15,6 +15,7 @@ This is a simple news application built with React and Ant Design. It fetches ne
 
 - View top headlines by country and category
 - Read full articles on external websites
+- News archive feature to store and display previously published articles.
 - Responsive design for desktop and mobile devices
 
 ## Technologies
@@ -23,13 +24,15 @@ This is a simple news application built with React and Ant Design. It fetches ne
 - Ant Design
 - Axios
 - News API
+- Redux Toolkit
+- Redux Persist
 
 ## Installation
 
 1. Clone the repository:
 
    ```
-   git clone https://github.com/username/news-app.git
+   https://github.com/argianardi/Newslynet.git
    ```
 
 2. Install dependencies:
