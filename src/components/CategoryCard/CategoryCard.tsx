@@ -1,5 +1,6 @@
 import { Card } from 'antd';
 import { FC } from 'react';
+import moment from 'moment';
 
 import { Article } from '../../types/article';
 
@@ -12,7 +13,7 @@ const CategoryCard: FC<Props> = ({ article, onGotoArticleDetail }) => {
   return (
     <Card onClick={onGotoArticleDetail} hoverable style={{ marginBottom: 20 }}>
       <p style={{ fontSize: 11 }} className="date">
-        {article.publishedAt}
+        {moment(article.publishedAt).format('MMMM DD, YYYY')}
       </p>
       <h2 className="title" style={{ fontSize: 14 }}>
         {article.title}

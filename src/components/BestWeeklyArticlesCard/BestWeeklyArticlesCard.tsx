@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Card } from 'antd';
+import moment from 'moment';
 
 import { Article } from '../../types/article';
 
@@ -17,7 +18,7 @@ const BestWeeklyArticlesCard: FC<Props> = ({
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ marginRight: 5 }}>
           <p className="date" style={{ marginBottom: 2, fontSize: 11 }}>
-            {article.publishedAt}
+            {moment(article.publishedAt).format('MMMM DD, YYYY')}
           </p>
           <h3
             className="title"

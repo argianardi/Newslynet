@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Card } from 'antd';
+import moment from 'moment';
 
 import { Article } from '../../types/article';
 
@@ -34,7 +35,7 @@ const ArticleSnippetCard: FC<Props> = ({ article, onGotoArticleDetail }) => {
             />
           </div>
           <p style={{ fontSize: 11 }} className="date">
-            {article.publishedAt}
+            {moment(article.publishedAt).format('MMMM DD, YYYY')}
           </p>
           <h2
             className="title"
