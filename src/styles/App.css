@@ -33,7 +33,6 @@ nav,
 
 .link:hover {
   color: darkblue;
-  text-decoration: underline;
   cursor: pointer;
 }
 
