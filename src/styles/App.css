@@ -41,24 +41,6 @@ nav,
   padding: 10px 16px;
 }
 
-@media only screen and (min-width: 768px) {
-  .col-right-spacing {
-    padding-right: 20px;
-  }
-
-  .col-left-spacing {
-    padding-left: 5px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .col-right-spacing {
-    padding-right: 0px;
-  }
-  .col-left-spacing {
-    padding-left: 0px;
-  }
-}
-
 @media (min-width: 576px) and (max-width: 992px) {
   .content {
     padding: 10px 24px;
