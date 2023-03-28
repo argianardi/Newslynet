@@ -19,7 +19,6 @@ const Home: FC = () => {
   const [coverArticle, setCoverArticle] = useState<Article | undefined>(
     undefined
   );
-  const [loading, setLoading] = useState<boolean>(true);
   const [category, setCategory] = useState<string>('business');
 
   useEffect(() => {
@@ -37,14 +36,12 @@ const Home: FC = () => {
   }, [categorizedArticles]);
 
   const getArticlesByCategory = async () => {
-    setLoading(true);
     await axios
       .get(
         `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.REACT_APP_API_KEY}`
       )
       .then((response) => {
         setCategorizedArticles(response.data.articles);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -70,11 +67,15 @@ const Home: FC = () => {
     });
   };
 
+  const handleCategory = (category: string) => {
+    setCategory(category);
+  };
+
   return (
     <Layout>
-      <Header style={{ zIndex: 999 }}>
+      <Header style={{ zIndex: 999, marginBottom: 15 }}>
         <Row justify="center">
-          <AppHeader hiddenCategory={true} />
+          <AppHeader hiddenCategory={true} onHandleCategory={handleCategory} />
         </Row>
       </Header>
       <Content className="content">
