@@ -10,17 +10,23 @@ const { Header } = Layout;
 
 interface Props {
   hiddenCategory: boolean;
+  onHandleCategory?: (category: string) => void;
 }
 
-const AppHeader: FC<Props> = ({ hiddenCategory }) => {
+const AppHeader: FC<Props> = ({ hiddenCategory, onHandleCategory }) => {
   const [open, setOpen] = useState(false);
-
   const showDrawer = () => {
     setOpen(true);
   };
 
   const onClose = () => {
     setOpen(false);
+  };
+
+  const handleCategory = (category: string) => {
+    if (onHandleCategory) {
+      onHandleCategory(category);
+    }
   };
 
   return (
@@ -36,12 +42,24 @@ const AppHeader: FC<Props> = ({ hiddenCategory }) => {
             defaultSelectedKeys={['1']}
             className="menu-nav"
           >
-            <Menu.Item key="1">Business</Menu.Item>
-            <Menu.Item key="2">General</Menu.Item>
-            <Menu.Item key="3">Health</Menu.Item>
-            <Menu.Item key="4">Sciene</Menu.Item>
-            <Menu.Item key="5">Sports</Menu.Item>
-            <Menu.Item key="6">Technology</Menu.Item>
+            <Menu.Item key="1" onClick={() => handleCategory('business')}>
+              Business
+            </Menu.Item>
+            <Menu.Item key="2" onClick={() => handleCategory('general')}>
+              General
+            </Menu.Item>
+            <Menu.Item key="3" onClick={() => handleCategory('health')}>
+              Health
+            </Menu.Item>
+            <Menu.Item key="4" onClick={() => handleCategory('science')}>
+              Sciene
+            </Menu.Item>
+            <Menu.Item key="5" onClick={() => handleCategory('sports')}>
+              Sports
+            </Menu.Item>
+            <Menu.Item key="6" onClick={() => handleCategory('technology')}>
+              Technology
+            </Menu.Item>
           </Menu>
           <div className="menu-toggle ">
             <Button onClick={showDrawer}>
@@ -60,12 +78,24 @@ const AppHeader: FC<Props> = ({ hiddenCategory }) => {
         className="custom-drawer"
       >
         <Menu mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">Business</Menu.Item>
-          <Menu.Item key="2">General</Menu.Item>
-          <Menu.Item key="3">Health</Menu.Item>
-          <Menu.Item key="4">Sciene</Menu.Item>
-          <Menu.Item key="5">Sports</Menu.Item>
-          <Menu.Item key="6">Technology</Menu.Item>
+          <Menu.Item key="1" onClick={() => handleCategory('business')}>
+            Business
+          </Menu.Item>
+          <Menu.Item key="2" onClick={() => handleCategory('general')}>
+            General
+          </Menu.Item>
+          <Menu.Item key="3" onClick={() => handleCategory('health')}>
+            Health
+          </Menu.Item>
+          <Menu.Item key="4" onClick={() => handleCategory('science')}>
+            Sciene
+          </Menu.Item>
+          <Menu.Item key="5" onClick={() => handleCategory('sports')}>
+            Sports
+          </Menu.Item>
+          <Menu.Item key="6" onClick={() => handleCategory('technology')}>
+            Technology
+          </Menu.Item>
         </Menu>
       </Drawer>
     </Header>
