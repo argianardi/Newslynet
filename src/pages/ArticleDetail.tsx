@@ -53,7 +53,7 @@ const ArticleDetail: FC = () => {
     <Layout>
       <Header style={{ zIndex: 999 }}>
         <Row justify="center">
-          <AppHeader />
+          <AppHeader hiddenCategory={false} />
         </Row>
       </Header>
       <Content className="content">

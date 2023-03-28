@@ -74,7 +74,7 @@ const Home: FC = () => {
     <Layout>
       <Header style={{ zIndex: 999 }}>
         <Row justify="center">
-          <AppHeader />
+          <AppHeader hiddenCategory={true} />
         </Row>
       </Header>
       <Content className="content">
