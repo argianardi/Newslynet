@@ -51,7 +51,7 @@ const ArticleDetail: FC = () => {
 
   return (
     <Layout>
-      <Header style={{ zIndex: 999 }}>
+      <Header style={{ zIndex: 999, marginBottom: 15 }}>
         <Row justify="center">
           <AppHeader hiddenCategory={false} />
         </Row>
@@ -97,7 +97,7 @@ const ArticleDetail: FC = () => {
             </h3>
           </div>
           {otherArticles.map((article, index) => (
-            <Col key={index} xs={24} sm={12} md={8} lg={8} span={24}>
+            <Col key={index} xs={24} sm={12} md={8} lg={6} span={24}>
               <ArticleSnippetCard
                 article={article}
                 onGotoArticleDetail={() => handleGoToArticleDetail(article)}
