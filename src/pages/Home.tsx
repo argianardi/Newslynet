@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Col, Layout, Row } from 'antd';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import { Article } from '../types/article';
 import CoverArticleCard from '../components/CoverArticleCard/CoverArticleCard';
@@ -11,6 +12,8 @@ import BestWeeklyArticleCard from '../components/BestWeeklyArticlesCard/BestWeek
 const { Header, Content, Footer } = Layout;
 
 const Home: FC = () => {
+  const navigate = useNavigate();
+
   const [categorizedArticles, setCategorizedArticles] = useState<Article[]>([]);
   const [bestWeeklyArticles, setBestWeeklyArticles] = useState<Article[]>([]);
   const [coverArticle, setCoverArticle] = useState<Article | undefined>(
@@ -61,6 +64,12 @@ const Home: FC = () => {
       });
   };
 
+  const handleGoToArticleDetail = (article: Article) => {
+    navigate(`/article/detail/${article.title}`, {
+      state: article,
+    });
+  };
+
   return (
     <Layout>
       <Header style={{ zIndex: 999 }}>
@@ -97,7 +106,11 @@ const Home: FC = () => {
               </h3>
             </div>
             {categorizedArticles.map((article, index) => (
-              <CategoryCard article={article} key={index} />
+              <CategoryCard
+                article={article}
+                key={index}
+                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+              />
             ))}
           </Col>
           <Col span={24} lg={8} className="">
@@ -123,8 +136,12 @@ const Home: FC = () => {
                 Best Of The Week
               </h3>
             </div>
-            {bestWeeklyArticles.map((article, index) => (
-              <BestWeeklyArticleCard article={article} key={index} />
+            {bestWeeklyArticles.map((article: Article, index: number) => (
+              <BestWeeklyArticleCard
+                article={article}
+                key={index}
+                onGotoArticleDetail={() => handleGoToArticleDetail(article)}
+              />
             ))}
           </Col>
         </Row>
