@@ -1,19 +1,24 @@
 import { FC } from 'react';
 import { Card } from 'antd';
+import moment from 'moment';
 
 import { Article } from '../../types/article';
 
 interface Props {
   article: Article;
+  onGotoArticleDetail: () => void;
 }
 
-const BestWeeklyArticlesCard: FC<Props> = ({ article }) => {
+const BestWeeklyArticlesCard: FC<Props> = ({
+  article,
+  onGotoArticleDetail,
+}) => {
   return (
-    <Card hoverable style={{ marginBottom: 20 }}>
+    <Card onClick={onGotoArticleDetail} hoverable style={{ marginBottom: 20 }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ marginRight: 5 }}>
           <p className="date" style={{ marginBottom: 2, fontSize: 11 }}>
-            {article.publishedAt}
+            {moment(article.publishedAt).format('MMMM DD, YYYY')}
           </p>
           <h3
             className="title"
@@ -24,9 +29,9 @@ const BestWeeklyArticlesCard: FC<Props> = ({ article }) => {
           >
             {article.title}
           </h3>
-          <a className="link" style={{ marginBottom: 0 }}>
+          <p className="link" style={{ marginBottom: 0 }}>
             Read more...
-          </a>
+          </p>
         </div>
         <div style={{ width: 300, height: 120 }}>
           <img

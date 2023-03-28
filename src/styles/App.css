@@ -26,6 +26,17 @@ nav,
   font-family: 'Nunito Sans';
 }
 
+.link {
+  color: blue;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: darkblue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .content {
   padding: 10px 16px;
 }

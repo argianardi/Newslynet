@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Card } from 'antd';
+import moment from 'moment';
 
 import { Article } from '../../types/article';
 
@@ -52,7 +53,7 @@ const CoverArticleCard: FC<Props> = ({ coverArticle }) => {
             />
           </div>
           <p style={{ fontSize: 11 }} className="date">
-            {coverArticle.publishedAt}
+            {moment(coverArticle.publishedAt).format('MMMM DD, YYYY')}
           </p>
           <h2 className="title" style={{ fontSize: 16 }}>
             {coverArticle.title}

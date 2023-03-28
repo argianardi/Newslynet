@@ -1,6 +1,5 @@
 .header {
   background-color: white;
-  border-bottom: 1px solid #ddd;
   position: fixed;
   width: 100%;
   display: flex;
@@ -51,10 +50,6 @@
 }
 
 @media (min-width: 640px) and (max-width: 767px) {
-  .header {
-    padding: 0 40px;
-  }
-
   .menu-nav {
     display: block;
     background-color: transparent;
@@ -69,10 +64,6 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .header {
-    padding: 0 60px;
-  }
-
   .menu-nav {
     display: block;
     width: 500px;
@@ -83,9 +74,5 @@
   .menu-nav {
     display: block;
     width: 500px;
-  }
-
-  .header {
-    padding: 0 80px;
   }
 }
